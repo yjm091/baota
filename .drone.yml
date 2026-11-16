@@ -2,7 +2,24 @@ kind: pipeline
 type: docker
 name: deploy-to-baota
 
+# 1. 禁用默认克隆
+clone:
+  disable: true
+
 steps:
+# 2. 手动克隆步骤（加上代理）
+- name: clone
+  image: alpine/git
+  environment:
+    # ⚠️ IP 必须是你的本机局域网 IP（192.168.151.142）
+    # 端口填 7890（你的混合端口）
+    HTTP_PROXY: http://192.168.151.142:7890
+    HTTPS_PROXY: http://192.168.151.142:7890
+  commands:
+    - git clone https://github.com/yjm091/baota.git .
+    - git checkout $DRONE_COMMIT_SHA
+
+# 3. 传输文件到宝塔
 - name: scp-files
   image: appleboy/drone-scp
   settings:
@@ -13,9 +30,6 @@ steps:
     port: 2222
     key:
       from_secret: ssh_private_key
-    # source 是你要传的文件，可以用通配符，比如 source: ./* 或者指定 index.html
-    source: index.html 
-    # target 是宝塔里的目标文件夹（注意最后那个斜杠必须要有）
+    source: ./* 
     target: /www/wwwroot/default/
-    # 如果你想把整个目录传过去，加上这句去掉最外层目录
-    strip_components: 0
+    overwrite: true
