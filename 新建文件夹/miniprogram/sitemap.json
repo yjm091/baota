@@ -1,0 +1,1 @@
+{ "desc": "餐厅桌号选择与点餐页面", "rules": [{ "action": "allow", "page": "*" }] }

@@ -1,0 +1,49 @@
+<view class="page">
+  <view class="head">
+    <text class="eyebrow">YOUR TABLE</text>
+    <text class="title">{{tableName}} · 本桌订单</text>
+    <text class="hint">显示本桌已提交的所有订单；每批订单分别付款</text>
+  </view>
+
+  <view wx:if="{{!orders.length}}" class="empty">
+    <text class="empty-icon">🥢</text>
+    <text>本桌还没有已提交的点餐</text>
+    <button class="go-menu" bindtap="goMenu">去看看菜单</button>
+  </view>
+
+  <view wx:for="{{orders}}" wx:key="id" class="order-card">
+    <view class="order-head">
+      <text>第 {{item.batchNo}} 批 · {{item.createdLabel}}</text>
+      <text class="status">{{item.statusLabel}}</text>
+    </view>
+    <view class="payment-row">
+      <text class="payment-status {{item.paymentStatus}}">{{item.paymentLabel}}</text>
+      <text wx:if="{{item.paymentMethodLabel}}" class="payment-method">{{item.paymentMethodLabel}}</text>
+    </view>
+    <view wx:for="{{item.items}}" wx:for-item="dish" wx:key="dishId" class="line">
+      <view class="dish-copy">
+        <text class="dish">{{dish.name}}</text>
+        <text wx:if="{{dish.optionLabel}}" class="sub">{{dish.optionLabel}}</text>
+        <text wx:if="{{dish.note}}" class="sub">备注：{{dish.note}}</text>
+        <text class="sub">制作：{{dish.productionLabel}} · 上桌：{{dish.serviceLabel}}</text>
+      </view>
+      <text class="quantity">× {{dish.quantity}}</text>
+      <text class="amount">¥{{dish.amountLabel}}</text>
+    </view>
+    <view class="total"><text>本批小计</text><text>¥{{item.subtotalLabel}}</text></view>
+    <button wx:if="{{item.canPay}}" class="pay-button" data-id="{{item.id}}" bindtap="payOrder">继续模拟支付</button>
+  </view>
+
+  <view wx:if="{{orders.length}}" class="total-card">
+    <text>本桌已提交金额</text>
+    <text class="price">¥{{grandTotal}}</text>
+    <text class="hint block">本页面包含已付款与待付款订单</text>
+  </view>
+
+  <view wx:if="{{orders.length && sessionStatus === 'open'}}" class="finish-card">
+    <text class="finish-title">结束本桌</text>
+    <text class="finish-hint">{{finishReason}}</text>
+    <button class="finish-button {{canFinish ? '' : 'finish-disabled'}}" bindtap="finishSession">确认结束本桌</button>
+  </view>
+  <button class="refresh" bindtap="loadOrders">↻ 刷新订单状态</button>
+</view>

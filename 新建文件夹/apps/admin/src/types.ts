@@ -1,0 +1,11 @@
+export type Role = 'admin' | 'frontdesk' | 'kitchen'
+export type Category = { id: string; name: string; sort: number; active: boolean }
+export type Choice = { name: string; priceDelta: number }
+export type OptionGroup = { group: string; required: boolean; choices: Choice[] }
+export type Dish = { id: string; categoryId: string; name: string; description: string; imageFileId?: string; imageUrl?: string; basePrice: number; options: OptionGroup[]; active: boolean; soldOut: boolean; sort: number }
+export type OrderItem = { dishId: string; name: string; optionNames: string[]; unitPrice: number; quantity: number; note?: string; status?: string; productionStatus?: 'pending' | 'preparing' | 'ready'; serviceStatus?: 'pending' | 'served'; servedAt?: string; refunds?: { quantity: number; reason: string }[] }
+export type Order = { id: string; sessionId: string; tableId: string; batchNo: number; status: string; paymentStatus?: 'unpaid' | 'paid'; paymentMethod?: 'wechat' | 'alipay' | 'card'; paymentMode?: 'simulated'; items: OrderItem[]; subtotal: number; refundedTotal?: number; createdAt: string; paidAt?: string }
+export type Session = { id: string; _id?: string; tableId: string; status: 'open' | 'closed'; openedAt: string; total?: number }
+export type Table = { id: string; name: string; active: boolean; currentSession?: Session | null }
+export type Staff = { _id: string; username: string; role: Role; mustChangePassword?: boolean }
+export type Overview = { openSessions: number; openOrders: number; tables: number; todayRevenue: number; categories: Category[]; dishes: Dish[]; sessions: Session[]; orders: Order[] }

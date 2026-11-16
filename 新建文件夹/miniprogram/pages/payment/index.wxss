@@ -1,0 +1,31 @@
+page { min-height:100%; background:#f8f5ef; color:#263b31; }
+.page { min-height:100vh; box-sizing:border-box; padding:34rpx 28rpx calc(34rpx + env(safe-area-inset-bottom)); }
+.payment-card { padding:38rpx 30rpx; border:1rpx solid #e9e1d5; border-radius:24rpx; background:#fffdf9; text-align:center; }
+.status-mark { display:flex; align-items:center; justify-content:center; width:76rpx; height:76rpx; margin:0 auto 20rpx; border-radius:50%; background:#e8efe7; color:#3e7656; font-size:42rpx; font-weight:700; }
+.eyebrow { display:block; color:#b17a4d; font-size:18rpx; letter-spacing:3rpx; }
+.title { display:block; margin-top:12rpx; color:#263b31; font-size:38rpx; font-weight:700; }
+.subtitle { display:block; margin-top:10rpx; color:#857c70; font-size:22rpx; }
+.amount-panel { display:flex; flex-direction:column; align-items:center; margin-top:32rpx; padding:28rpx 20rpx; border-radius:18rpx; background:#f8f5ef; }
+.method-list { display:flex; flex-direction:column; gap:14rpx; margin-top:24rpx; }
+.method { display:flex; align-items:center; gap:18rpx; padding:18rpx 20rpx; border:2rpx solid #eee5d8; border-radius:16rpx; background:#fff; }
+.method-selected { border-color:#a3442e; background:#fffaf6; }
+.method-icon { display:flex; align-items:center; justify-content:center; flex:none; width:58rpx; height:58rpx; border-radius:16rpx; color:#fff; font-size:25rpx; font-weight:700; }
+.wechat-icon { background:#07c160; }
+.alipay-icon { background:#1677ff; }
+.card-icon { background:#52677d; font-size:29rpx; }
+.method-name { flex:1; color:#34312d; text-align:left; font-size:24rpx; }
+.method-check { width:32rpx; height:32rpx; border:1rpx solid #d7cec1; border-radius:50%; color:#a3442e; line-height:32rpx; font-size:22rpx; }
+.method-selected .method-check { border-color:#a3442e; }
+.amount-label { color:#7f776c; font-size:22rpx; }
+.amount { margin-top:10rpx; color:#a3442e; font-size:54rpx; font-weight:750; }
+.table-label { margin-top:8rpx; color:#82796e; font-size:21rpx; }
+.payment-note { margin-top:24rpx; padding:24rpx; border:1rpx solid #eee5d8; border-radius:16rpx; text-align:left; }
+.note-title { display:block; color:#263b31; font-size:25rpx; font-weight:700; }
+.note-copy { display:block; margin-top:12rpx; color:#70695f; font-size:22rpx; line-height:1.7; }
+.note-foot { display:block; margin-top:14rpx; color:#a3442e; font-size:20rpx; line-height:1.5; }
+.primary-button,.secondary-button { width:100%; margin-top:24rpx; border-radius:42rpx; font-size:24rpx; }
+.primary-button { background:#263b31; color:#fffaf2; }
+.secondary-button { margin-top:14rpx; background:#f0e9df; color:#514b43; }
+.primary-button::after,.secondary-button::after { border:0; }
+.empty-card { padding-top:100rpx; padding-bottom:100rpx; }
+.empty-card .primary-button { margin-top:36rpx; }

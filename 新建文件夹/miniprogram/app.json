@@ -1,0 +1,15 @@
+{
+  "pages": ["pages/tables/index", "pages/menu/index", "pages/orders/index", "pages/payment/index"],
+  "window": { "navigationBarTitleText": "餐厅点餐", "navigationBarBackgroundColor": "#fffaf2", "navigationBarTextStyle": "black", "backgroundColor": "#fffaf2" },
+  "tabBar": {
+    "color": "#77736d",
+    "selectedColor": "#a3442e",
+    "backgroundColor": "#fffaf2",
+    "list": [
+      { "pagePath": "pages/menu/index", "text": "点菜" },
+      { "pagePath": "pages/orders/index", "text": "本桌订单" }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

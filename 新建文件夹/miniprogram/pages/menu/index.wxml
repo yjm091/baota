@@ -1,0 +1,20 @@
+<view class="page">
+  <view class="table-banner"><view><text class="eyebrow">WELCOME TO OUR TABLE</text><text class="table-title">{{tableName}}</text></view><button class="change-table" bindtap="chooseTable">更换桌号</button></view>
+  <view class="notice">每批点餐单独模拟支付 · 付款后由前台确认，再安排制作</view>
+  <view class="layout">
+    <scroll-view class="categories" scroll-x show-scrollbar="{{false}}">
+      <view wx:for="{{categories}}" wx:key="id" class="category {{activeCategory === item.id ? 'selected' : ''}}" data-id="{{item.id}}" bindtap="selectCategory">{{item.name}}</view>
+    </scroll-view>
+    <scroll-view class="dish-list" scroll-y>
+      <view wx:for="{{visibleDishes}}" wx:key="id" class="dish-card">
+        <image wx:if="{{item.imageUrl}}" class="dish-image" src="{{item.imageUrl}}" mode="aspectFill" />
+        <view wx:else class="dish-image image-placeholder">🍲</view>
+        <view class="dish-copy"><text class="dish-name">{{item.name}}</text><text class="dish-desc">{{item.description}}</text><view class="dish-bottom"><text class="price">¥{{item.basePrice}}</text><text wx:if="{{item.soldOut}}" class="sold">售罄</text><view wx:else class="add" data-id="{{item.id}}" bindtap="addDish">＋</view></view></view>
+      </view>
+      <view wx:if="{{!visibleDishes.length}}" class="empty">这个分类暂时没有菜品</view>
+    </scroll-view>
+  </view>
+  <view wx:if="{{cartOpen}}" class="cart-shade" bindtap="closeCart"><view class="cart-sheet" catchtap="stop"><view class="cart-sheet-head"><view><text class="cart-sheet-title">本桌共享点餐单</text><text class="cart-sheet-note">同桌顾客的增减会同步显示</text></view><view wx:if="{{cart.length}}" class="clear-cart" bindtap="clearCart">清空</view></view><view wx:if="{{!cart.length}}" class="cart-empty">本桌点餐单还是空的</view><scroll-view wx:else class="cart-lines" scroll-y><view wx:for="{{cart}}" wx:key="cartKey" class="cart-line"><view class="cart-line-info"><text class="cart-dish-name">{{item.name}}</text><text wx:if="{{item.optionLabel}}" class="cart-option">{{item.optionLabel}}</text><text wx:if="{{item.note}}" class="cart-option">备注：{{item.note}}</text><text class="cart-unit-price">¥{{item.unitPriceLabel}} / 份</text></view><view class="quantity-control"><view class="quantity-button minus" data-key="{{item.cartKey}}" bindtap="decreaseItem">−</view><text>{{item.quantity}}</text><view class="quantity-button plus" data-key="{{item.cartKey}}" bindtap="increaseItem">＋</view></view></view></scroll-view><view class="cart-sheet-foot"><view><text class="cart-label">共 {{cartCount}} 份</text><text class="price">¥{{cartTotal}}</text></view><button class="submit" disabled="{{!cartCount}}" bindtap="submitOrder">提交本次点餐</button></view></view></view>
+  <view class="cart-bar"><view class="cart-summary" bindtap="openCart"><text class="cart-count">{{cartCount}}</text><text class="cart-label">份 · 查看点餐单 </text><text class="price">¥{{cartTotal}}</text></view><button class="submit" disabled="{{!cartCount}}" bindtap="submitOrder">提交本次点餐</button></view>
+  <view wx:if="{{selectedDish}}" class="shade" bindtap="closeDish"><view class="dish-sheet" catchtap="stop"><text class="sheet-title">{{selectedDish.name}}</text><text class="sheet-price">¥{{selectedDish.basePrice}}</text><view wx:for="{{selectedDish.options}}" wx:for-item="group" wx:key="group" class="option-group"><text>{{group.group}}{{group.required ? '（必选）' : ''}}</text><view class="option-row"><text wx:for="{{group.choices}}" wx:for-item="choice" wx:key="name" class="option {{selectedOptions[group.group] === choice.name ? 'option-on' : ''}}" data-group="{{group.group}}" data-name="{{choice.name}}" bindtap="chooseOption">{{choice.name}}{{choice.priceDelta ? ' +¥' + choice.priceDelta : ''}}</text></view></view><textarea class="note" maxlength="100" placeholder="忌口或口味备注（选填）" value="{{dishNote}}" bindinput="changeNote"/><button class="submit wide" bindtap="confirmDish">加入本次点餐</button></view></view>
+</view>

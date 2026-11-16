@@ -1,0 +1,29 @@
+<view class="page">
+  <view wx:if="{{order}}" class="payment-card">
+    <view class="status-mark">✓</view>
+    <text class="eyebrow">ORDER RECEIVED</text>
+    <text class="title">订单已提交</text>
+    <text class="subtitle">选择支付方式，完成本批订单模拟支付</text>
+
+    <view class="amount-panel">
+      <text class="amount-label">本次订单金额</text>
+      <text class="amount">¥{{amount}}</text>
+      <text class="table-label">{{order.tableName}} · 第 {{order.batchNo}} 批</text>
+    </view>
+
+    <view class="method-list">
+      <view class="method {{method === 'wechat' ? 'method-selected' : ''}}" data-method="wechat" bindtap="selectMethod"><view class="method-icon wechat-icon">微</view><text class="method-name">微信支付</text><text class="method-check">{{method === 'wechat' ? '✓' : ''}}</text></view>
+      <view class="method {{method === 'alipay' ? 'method-selected' : ''}}" data-method="alipay" bindtap="selectMethod"><view class="method-icon alipay-icon">支</view><text class="method-name">支付宝</text><text class="method-check">{{method === 'alipay' ? '✓' : ''}}</text></view>
+      <view class="method {{method === 'card' ? 'method-selected' : ''}}" data-method="card" bindtap="selectMethod"><view class="method-icon card-icon">▰</view><text class="method-name">银行卡</text><text class="method-check">{{method === 'card' ? '✓' : ''}}</text></view>
+    </view>
+
+    <view class="payment-note"><text class="note-foot">演示支付，不会发生真实扣款。确认后本批订单会标记为已模拟付款，并等待前台确认。</text></view>
+    <button class="primary-button" loading="{{paying}}" disabled="{{paying}}" bindtap="confirmPayment">{{paying ? '处理中…' : '确认模拟支付 ¥' + amount}}</button>
+    <button class="secondary-button" bindtap="goOrders">取消支付，稍后在订单页继续</button>
+  </view>
+  <view wx:else class="payment-card empty-card">
+    <text class="title">暂无待付款订单</text>
+    <text class="subtitle">请先选择餐桌并提交点餐</text>
+    <button class="primary-button" bindtap="chooseTable">选择桌号</button>
+  </view>
+</view>

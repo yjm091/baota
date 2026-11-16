@@ -1,0 +1,12 @@
+{
+  "name": "restaurant-ordering",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": ["apps/admin", "cloudfunctions/api"],
+  "scripts": {
+    "dev:admin": "npm run dev -w @restaurant/admin",
+    "build:admin": "npm run build -w @restaurant/admin",
+    "build:function": "npm run build -w @restaurant/api",
+    "build": "npm run build:admin && npm run build:function"
+  }
+}

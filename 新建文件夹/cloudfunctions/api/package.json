@@ -1,0 +1,9 @@
+{
+  "name": "@restaurant/api",
+  "version": "0.1.0",
+  "private": true,
+  "main": "index.js",
+  "scripts": { "build": "tsc -p tsconfig.json" },
+  "dependencies": { "@cloudbase/node-sdk": "^3.10.0", "wx-server-sdk": "^3.0.1" },
+  "devDependencies": { "@types/node": "^22.10.2", "typescript": "^5.7.2" }
+}

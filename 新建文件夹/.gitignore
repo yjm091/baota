@@ -1,0 +1,8 @@
+node_modules/
+dist/
+apps/admin/dist/
+cloudfunctions/api/dist/
+.env
+.env.local
+miniprogram/project.private.config.json
+*.log
