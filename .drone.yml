@@ -11,12 +11,11 @@ steps:
 - name: clone
   image: alpine/git
   environment:
-    # ⚠️ 把 IP 换成 host.docker.internal，这是 Docker 专属的宿主机域名
-    HTTP_PROXY: http://host.docker.internal:7890
-    HTTPS_PROXY: http://host.docker.internal:7890
+    # 把这里的 .151 改成 .155
+    HTTP_PROXY: http://192.168.155.142:7890
+    HTTPS_PROXY: http://192.168.155.142:7890
   commands:
     - git clone https://github.com/yjm091/baota.git .
-
 # 3. 传输文件到宝塔
 - name: scp-files
   image: appleboy/drone-scp
